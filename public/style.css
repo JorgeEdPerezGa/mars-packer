@@ -23,6 +23,12 @@ h1 {
   margin: 50px auto;
 }
 
+.card-section {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
 .card {
   background: #d2d2d2;
   height: 130px;
