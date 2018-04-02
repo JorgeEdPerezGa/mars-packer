@@ -57,6 +57,12 @@ h1 {
   background: #dd585b;
 }
 
+#submitButton:disabled {
+  cursor: auto;
+  background: black;
+  color: gray;
+}
+
 #itemInput {
   font-size: 20px;
   padding-left: 12px;

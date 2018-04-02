@@ -1,6 +1,6 @@
 const renderItems = (item) => {
   $('.card-section').append(`
-    <div class="card">
+    <div class="card" id="${item.id}">
       <p>${item.item}</p>
       <input type="checkbox" id="pack">packed<br>
     <button class="deleteItem">delete</button>
@@ -15,6 +15,12 @@ const getItems = async() => {
   return items.forEach(item => {
     renderItems(item)
   })
+}
+
+const enableSubmit = () => {
+  itemInput.value.length !== 0
+  ? submitButton.disabled = false
+  : submitButton.disabled = true;
 }
 
 const handleSubmit = async () => {
@@ -36,12 +42,23 @@ const handleSubmit = async () => {
       throw new Error('could not post item')
       } else { await postItem.json() }
   } catch (error) { throw (error) }
+  history.go(0);
 }
 
-const handleDelete = () => {
-  console.log('delete');
+const handleDelete = (event) => {
+  const parent = event.target.parentNode;
+  const id = parent.getAttribute('id');
+  const url = `/api/v1/items/${id}`;
+
+  fetch(url, {
+    method: "DELETE"
+  })
+  .then(response => console.log('deleted'))
+  .catch(error => console.log('error'))
+  parent.remove();
 }
 
 window.onload = () => getItems();
+itemInput.addEventListener('keyup', enableSubmit)
 submitButton.addEventListener('click', handleSubmit);
 $('.card-section').on('click', '.card', '.deleteItem', handleDelete)
