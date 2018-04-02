@@ -1,10 +1,19 @@
+const renderItems = (item) => {
+  $('.card-section').append(`
+    <div class="card">
+      <p>${item.item}</p>
+      <input type="checkbox" id="pack">packed<br>
+    <button class="deleteItem">delete</button>
+  </div>`)
+}
+
 const getItems = async() => {
   const url = '/api/v1/items';
   const getItems = await fetch(url);
   const items = await getItems.json();
 
   return items.forEach(item => {
-    console.log(item);
+    renderItems(item)
   })
 }
 
