@@ -1,3 +1,13 @@
+const getItems = async() => {
+  const url = '/api/v1/items';
+  const getItems = await fetch(url);
+  const items = await getItems.json();
+
+  return items.forEach(item => {
+    console.log(item);
+  })
+}
+
 const handleSubmit = async () => {
   const item = {
     'item': itemInput.value
@@ -19,4 +29,5 @@ const handleSubmit = async () => {
   } catch (error) { throw (error) }
 }
 
+window.onload = () => getItems();
 submitButton.addEventListener('click', handleSubmit);
