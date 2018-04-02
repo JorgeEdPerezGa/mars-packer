@@ -23,6 +23,32 @@ describe('API Routes', () => {
     });
   });
 
+  describe('GET /api/v1/items', () => {
+    it('should get all items', () => {
+      return chai.request(server)
+      .get('/api/v1/items')
+      .then(response => {
+        response.should.have.status(200);
+        response.should.be.json;
+        response.should.be.a('object');
+        response.body.length.should.equal(1);
+        response.body[0].should.have.property('id');
+        response.body[0].should.have.property('item');
+        response.body[0].should.have.property('created_at');
+        response.body[0].should.have.property('updated_at');
+        response.body[0].should.have.property('not_packed');
+      })
+      .catch(error => { throw error });
+    })
+
+    it('should return a 404 status if nonexistent', () => {
+      return chai.request(server)
+      .get('/api/v1/nonexistent')
+      .then(response => { response.should.have.status(404) })
+      .catch(error => { throw error });
+    })
+  })
+
   describe('POST /api/v1/items', () => {
     it('should post an item', () => {
       return chai.request(server)
@@ -35,8 +61,22 @@ describe('API Routes', () => {
         response.body.should.be.a('object');
         response.body.should.have.property('item');
         response.body.item.should.equal('new item');
-
       })
+    })
+
+    it('should return a 404 status if nonexistent', () => {
+      return chai.request(server)
+      .get('/api/v1/nonexistent')
+      .then(response => { response.should.have.status(404) })
+      .catch(error => { throw error });
+    })
+  })
+
+  describe('DELETE /api/v1/items/:id', () => {
+    it('should delete an item', () => {
+      return chai.request(server)
+      .delete('/api/v1/items/1')
+      .then(response => { response.should.have.status(204) })
     })
   })
 })

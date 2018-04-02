@@ -31,6 +31,14 @@ app.post('/api/v1/items', (request, response) => {
     .catch(error => response.status(500).json({ error }))
 })
 
+app.delete('/api/v1/items/:id', (request, response) => {
+  database('items').where('id', request.params.id).del()
+
+  .then(id => response.status(204).json(id))
+  .catch(error => response.status(500).json({ errror }))
+})
+
+
 app.listen(app.get('port'), () => {
   console.log(`server running on port ${app.get('port')}`);
 });
