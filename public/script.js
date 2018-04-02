@@ -46,16 +46,18 @@ const handleSubmit = async () => {
 }
 
 const handleDelete = (event) => {
-  const parent = event.target.parentNode;
-  const id = parent.getAttribute('id');
-  const url = `/api/v1/items/${id}`;
+  if(event.target.classList.contains('deleteItem')) {
+    const parent = event.target.parentNode;
+    const id = parent.getAttribute('id');
+    const url = `/api/v1/items/${id}`;
 
-  fetch(url, {
-    method: "DELETE"
-  })
-  .then(response => console.log('deleted'))
-  .catch(error => console.log('error'))
-  parent.remove();
+    fetch(url, {
+      method: "DELETE"
+    })
+    .then(response => console.log('deleted'))
+    .catch(error => console.log('error'))
+    parent.remove();
+  }
 }
 
 window.onload = () => getItems();
