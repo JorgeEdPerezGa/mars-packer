@@ -38,5 +38,10 @@ const handleSubmit = async () => {
   } catch (error) { throw (error) }
 }
 
+const handleDelete = () => {
+  console.log('delete');
+}
+
 window.onload = () => getItems();
 submitButton.addEventListener('click', handleSubmit);
+$('.card-section').on('click', '.card', '.deleteItem', handleDelete)
