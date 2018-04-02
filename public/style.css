@@ -47,6 +47,12 @@ h1 {
   width: 89px;
 }
 
+.deleteItem:hover {
+  cursor: pointer;
+  background: #763637;
+  color: #d86869;
+}
+
 #submitButton {
   border: none;
   margin: auto;
