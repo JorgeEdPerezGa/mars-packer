@@ -49,8 +49,7 @@ h1 {
 
 .deleteItem:hover {
   cursor: pointer;
-  background: #763637;
-  color: #d86869;
+  background: #d86869;
 }
 
 #submitButton {
