@@ -1,1 +1,22 @@
-console.log('mars packer');
+const handleSubmit = async () => {
+  const item = {
+    'item': itemInput.value
+  }
+
+  try {
+    const url = '/api/v1/items';
+    const postItem = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(item),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+
+    if(postItem.status > 299) {
+      throw new Error('could not post item')
+      } else { await postItem.json() }
+  } catch (error) { throw (error) }
+}
+
+submitButton.addEventListener('click', handleSubmit);
